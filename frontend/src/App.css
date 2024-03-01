@@ -1,0 +1,15 @@
+body {
+  background-color: #FCFCFE;
+  /* overflow: hidden; */
+}
+
+
+/* * {
+  scrollbar-width: auto;
+  scrollbar-color: #407587 #ffffff;
+} */
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  display: none;
+}
