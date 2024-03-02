@@ -8,7 +8,8 @@ const initialState = {
     status: false,
     data: {},
     socket: null,
-    events: []
+    events: [],
+    length: 0
 }
 
 export const create_user = createAsyncThunk(
@@ -37,11 +38,14 @@ export const create_user = createAsyncThunk(
 
 export const get_events = createAsyncThunk(
     'Admin/get_events',
-    async ({ }, { dispatch }) => {
+    async ({ data }, { dispatch }) => {
         try {
-            // dispatch(Load(true))
+            dispatch(Load(true))
             const url = "https://ap-south-1.aws.data.mongodb-api.com/app/application-1-uuoyo/endpoint/get_events"
-            const response = await axios.get(url)
+            const response = await axios.post(url, {
+                skip: data?.skip,
+                limit: data?.limit
+            })
             dispatch(Load(false))
             // dispatch(Notify({ msg: response?.data ? response?.data : 'Operation held with some issue !' }))
             return response.data
@@ -109,7 +113,8 @@ const AdminSlice = createSlice({
             .addCase(get_events.fulfilled, (state, actions) => {
                 return {
                     ...state,
-                    events: actions.payload
+                    events: actions.payload?.result,
+                    length: actions.payload?.length
                 }
             })
     }

@@ -18,6 +18,8 @@ import Auth from './layout/Auth';
 import AddEvents from './pages/AddEvents';
 import Event from './pages/Event';
 import EventsTable from './pages/EventLists';
+import EventsList from './pages/LandingComponents/EventsList';
+import EventSections from './pages/LandingComponents/EventSection';
 
 function App() {
   const load = useSelector(state => state?.LoadingReducer?.load)
@@ -28,7 +30,7 @@ function App() {
       element: <LandingPage />
     },
     {
-      path: '/signin',
+      path: 'signin',
       element:
         <>
           {
@@ -40,8 +42,18 @@ function App() {
         </>
     },
     {
-      path: '/events',
-      element: <Events />
+      path: 'events',
+      element: <Events />,
+      children: [
+        {
+          path: '',
+          element: <EventSections />
+        },
+        {
+          path: 'list',
+          element: <EventsList />
+        }
+      ]
     },
     {
       path: 'subscription',

@@ -9,7 +9,6 @@ const LoadingSlice = createSlice({
     initialState,
     reducers: {
         Load: (state, action) => {
-            console.log(action.payload)
             return {
                 ...state,   
                 load: action.payload

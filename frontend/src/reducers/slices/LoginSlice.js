@@ -144,7 +144,6 @@ const LoginSlice = createSlice({
     initialState,
     reducers: {
         Logout: () => {
-
             Cookies.remove('token')
             Cookies.remove('privilege')
             Cookies.remove('user_id')
